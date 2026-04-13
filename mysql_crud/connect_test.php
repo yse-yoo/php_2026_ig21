@@ -20,6 +20,7 @@
  */
 
 // TODO: require_once を使って './db.php' を読み込む
+require_once 'db.php';
 
 // 接続成功かどうかを判定する
 $is_connected = isset($pdo) && $pdo instanceof PDO;
