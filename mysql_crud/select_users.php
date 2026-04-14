@@ -17,7 +17,7 @@ function get($limit = 50)
 
     // TODO : users テーブルから件数を絞って全カラムを取得する SELECT 文
     // LIMIT にはプレースホルダー :limit を使う
-    $sql = "SELECT * FROM users LIMIT {$limit}";
+    $sql = "SELECT * FROM users LIMIT :limit";
 
     // TODO : プリペアドステートメントを作成
     // ヒント: $pdo->prepare($sql)
@@ -30,7 +30,7 @@ function get($limit = 50)
 
     // TODO : users テーブルから最大件数を指定して取得する SQL
     // SQL: SELECT * FROM users LIMIT :limit
-    $stmt->execute();
+    $stmt->execute(['limit' => $limit]);
 
     // TODO : 全件を連想配列で取得して return
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
