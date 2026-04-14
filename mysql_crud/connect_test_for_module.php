@@ -38,8 +38,6 @@ $description = '自作の Database クラス（シングルトンパターン）
 
 <body class="bg-slate-50 text-slate-800 leading-relaxed antialiased">
 
-    <?php include 'components/nav.php'; ?>
-
     <main class="max-w-4xl mx-auto px-6 py-12">
 
         <header class="mb-12">
