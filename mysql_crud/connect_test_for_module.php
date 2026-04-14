@@ -10,7 +10,7 @@ use Lib\Database;
 // PDOインスタンスを取得
 try {
     // TODO: Database::getInstance() を呼び出して PDO インスタンスを取得する
-    $pdo = null;
+    $pdo = Database::getInstance();
     $is_connected = $pdo instanceof PDO;
 } catch (Exception $e) {
     $is_connected = false;
