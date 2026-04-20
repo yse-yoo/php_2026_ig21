@@ -75,7 +75,9 @@ function update($id, $display_name, $password)
             // パスワードが入力されていない場合
             // TODO: display_name だけを更新する UPDATE 文
             // SET は1カラム、WHERE で id を絞る
-            $sql = "";
+            $sql = "UPDATE users 
+                    SET display_name = :display_name 
+                    WHERE id = :id";
         }
         // SQLを設定して、プリペアードステートメントを生成
         $stmt = $pdo->prepare($sql);
