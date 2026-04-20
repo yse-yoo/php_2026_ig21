@@ -69,7 +69,9 @@ function update($id, $display_name, $password)
             $hash = password_hash($password, PASSWORD_DEFAULT);
             // TODO: display_name と password を更新する UPDATE 文
             // SET に2カラム、WHERE で id を絞る。値はすべてプレースホルダー
-            $sql = "";
+            $sql = "UPDATE users 
+                    SET display_name = :display_name, password = :password
+                    WHERE id = :id";
             $params['password'] = $hash;
         } else {
             // パスワードが入力されていない場合
