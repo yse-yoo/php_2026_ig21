@@ -42,8 +42,8 @@ function insert($posts)
         $posts['password'] = password_hash($posts['password'], PASSWORD_DEFAULT);
 
         // 強制デバッグ＆終了
-        var_dump($posts);
-        exit;
+        // var_dump($posts);
+        // exit;
 
         // DB接続
         $pdo = Database::getInstance();
