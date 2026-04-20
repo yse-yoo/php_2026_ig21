@@ -100,7 +100,9 @@ function get($limit = 50)
                                     <td class="px-6 py-4"><?= htmlspecialchars($user['account_name']) ?></td>
                                     <td class="px-6 py-4"><?= htmlspecialchars($user['email']) ?></td>
                                     <td class="px-6 py-4"><?= htmlspecialchars($user['display_name']) ?></td>
-                                    <td class="px-6 py-4"><?= htmlspecialchars($user['id']) ?></td>
+                                    <td class="px-6 py-4">
+                                        <a href="update_user.php?id=<?= htmlspecialchars($user['id']) ?>">編集</a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
