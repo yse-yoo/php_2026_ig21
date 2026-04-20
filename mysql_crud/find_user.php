@@ -28,17 +28,18 @@ function find($id)
 
         // TODO : users テーブルから id が一致する1件を取得する SELECT 文
         // WHERE 条件の値にはプレースホルダー :id を使う
-        $sql = "SELECT * FROM users WHERE id = :id";
+        $sql = "SELECT * FROM users 
+                WHERE id = :id";
 
         // SQL事前準備
         $stmt = $pdo->prepare($sql);
 
         // TODO : execute() の引数に ['id' => $id] を渡してプレースホルダーをバインドする
-        // $stmt->execute(...);
+        $stmt->execute(['id' => $id]);
 
         // TODO : 1件を連想配列で取得して return してください
         //   ヒント: fetch(PDO::FETCH_ASSOC)
-        return null;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         error_log($e->getMessage());
         return null;
