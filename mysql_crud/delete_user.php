@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {
 }
 
 // TODO: POSTからIDを取得
-$id = null;
+$id = $_POST['id'];
 // TODO: delete関数を実行
 $result = delete($id);
 
@@ -29,11 +29,11 @@ function delete($id)
         // DB接続
         $pdo = Database::getInstance();
         // TODO: SQL作成: 指定した id で検索してレコードを削除
-        $sql = "";
+        $sql = "DELETE FROM users WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         // TODO: SQL実行して結果を返す
         // $stmt->execute() に ['id' => $id] を渡す
-        return null;
+        return $stmt->execute(['id' => $id]);
     } catch (PDOException $e) {
         error_log($e->getMessage());
         return false;
