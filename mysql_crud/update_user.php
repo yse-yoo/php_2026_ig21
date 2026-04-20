@@ -83,7 +83,7 @@ function update($id, $display_name, $password)
         $stmt = $pdo->prepare($sql);
         // TODO: SQL実行して結果を返す
         // $stmt->execute($params);
-        return null;
+        return $stmt->execute($params);
     } catch (PDOException $e) {
         error_log($e->getMessage());
         return false;
