@@ -49,8 +49,9 @@ function insert($posts)
         $pdo = Database::getInstance();
 
         // TODO: INSERT文
-        $sql = "";
-        // $sql = "INSERT INTO users (account_name, email, display_name, password) VALUES (:account_name, :email, :display_name, :password)";
+        $sql = "INSERT INTO users 
+                    (account_name, email, display_name, password) 
+                VALUES (:account_name, :email, :display_name, :password)";
 
         // SQLを設定して、プリペアードステートメントを生成
         $stmt = $pdo->prepare($sql);
