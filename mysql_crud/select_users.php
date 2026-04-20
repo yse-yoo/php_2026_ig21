@@ -83,6 +83,7 @@ function get($limit = 50)
                             <th class="px-6 py-4">アカウント名</th>
                             <th class="px-6 py-4">メール</th>
                             <th class="px-6 py-4">表示名</th>
+                            <th class="px-6 py-4">編集</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,6 +100,7 @@ function get($limit = 50)
                                     <td class="px-6 py-4"><?= htmlspecialchars($user['account_name']) ?></td>
                                     <td class="px-6 py-4"><?= htmlspecialchars($user['email']) ?></td>
                                     <td class="px-6 py-4"><?= htmlspecialchars($user['display_name']) ?></td>
+                                    <td class="px-6 py-4"><?= htmlspecialchars($user['id']) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
