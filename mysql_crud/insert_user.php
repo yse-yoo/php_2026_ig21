@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $_POST['キー名'] ?? '' で各値を取得
     // キー: account_name, email, display_name, password
     $posts = [
-        'account_name' => null,
-        'email'        => null,
-        'display_name' => null,
-        'password'     => null,
+        'account_name' => $_POST['account_name'] ?? null,
+        'email'        => $_POST['email'] ?? null,
+        'display_name' => $_POST['display_name'] ?? null,
+        'password'     => $_POST['password'] ?? null,
     ];
 
     if (empty($posts['account_name']) || empty($posts['email']) || empty($posts['password'])) {
