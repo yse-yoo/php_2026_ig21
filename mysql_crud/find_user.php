@@ -28,7 +28,7 @@ function find($id)
 
         // TODO : users テーブルから id が一致する1件を取得する SELECT 文
         // WHERE 条件の値にはプレースホルダー :id を使う
-        $sql = "";
+        $sql = "SELECT * FROM users WHERE id = :id";
 
         // SQL事前準備
         $stmt = $pdo->prepare($sql);
