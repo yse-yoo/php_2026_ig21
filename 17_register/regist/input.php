@@ -11,9 +11,9 @@ if (isset($_SESSION[APP_KEY]['regist'])) {
 $errors = [];
 if (isset($_SESSION[APP_KEY]['errors'])) {
     // TODO: セッション APP_KEY の errors があれば取得
-    $errors = "";
+    $errors = $_SESSION[APP_KEY]['errors'];
     // TODO: エラーメッセージはフラッシュメッセージ
-    // unset($_SESSION[APP_KEY]['errors']);
+    unset($_SESSION[APP_KEY]['errors']);
 }
 ?>
 
