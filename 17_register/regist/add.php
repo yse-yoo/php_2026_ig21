@@ -16,7 +16,7 @@ $posts = $_POST;
 // $posts = sanitize($_POST);
 
 // TODO: セッションの APP_KEY 下の regist にPOSTデータを保存
-$_SESSION[APP_KEY]['regist'] = null;
+$_SESSION[APP_KEY]['regist'] = $_POST;
 
 // ユーザが存在するかチェック
 $user = new User();
