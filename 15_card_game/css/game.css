@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+.font-game {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.hp-bar {
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-container {
+    perspective: 1000px;
+}
+
+.tcg-card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 4px solid #334155;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.tcg-card.player-card {
+    border-color: #6366f1;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+.tcg-card.enemy-card {
+    border-color: #f43f5e;
+    box-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
+}
+
+.card-image-frame {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: #000;
+}
+
+.element-badge {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.log-entry {
+    color: #f7f8f9;
+    border-left: 2px solid #f7f8f9;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
