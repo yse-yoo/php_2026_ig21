@@ -11,11 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // TODO: セッションにPOSTデータを登録
-$_SESSION[APP_KEY]['signin'] = null;
+$_SESSION[APP_KEY]['signin'] = sanitize($_POST);
 
 // TODO: 入力されたアカウント名とパスワードを取得
-$account_name = "";
-$password = "";
+$account_name = h($_POST['account_name']);
+$password = h($_POST['password']);
 
 // ユーザ認証: new User() で auth() を実行
 $user = new User();
