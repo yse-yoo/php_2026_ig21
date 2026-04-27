@@ -1,16 +1,16 @@
 <?php
 // TODO: モデルクラスを読み込む
-// require_once 'models/AquaCard.php';
-// require_once 'models/ForestCard.php';
-// require_once 'models/KnightCard.php';
-// require_once 'models/ThunderCard.php';
+require_once 'models/AquaCard.php';
+require_once 'models/ForestCard.php';
+require_once 'models/KnightCard.php';
+require_once 'models/ThunderCard.php';
 
 // TODO: 各カードクラスのインスタンスを作成
 $cards = [
-    'aqua' => null,
-    'knight' => null,
-    'forest' => null,
-    'thunder' => null,
+    'aqua' => new AquaCard(),
+    'knight' => new KnightCard(),
+    'forest' => new ForestCard(),
+    'thunder' => new ThunderCard(),
 ];
 
 // CSRFトークンの生成
