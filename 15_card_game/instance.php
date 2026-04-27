@@ -3,30 +3,30 @@
 require_once 'models/BaseCard.php';
 
 // // TODO: BaseCard クラスのインスタンスを作成
-// $card = new BaseCard(
-//     '水の精霊',
-//     18,
-//     25,
-//     100,
-//     3,
-//     '水',
-//     'AquaCard.png',
-//     'ハイドロポンプ',
-//     35
-// );
+$card = new BaseCard(
+    '水の精霊',
+    18,
+    25,
+    100,
+    3,
+    '水',
+    'AquaCard.png',
+    'ハイドロポンプ',
+    35
+);
 
 // TODO: インスタンス $card のプロパティを配列に格納
 $stats = [
-    'Name' => "",
-    'Level' => "",
-    'HP' => "",
-    'MP' => "",
-    'Attack' => "",
-    'Defense' => "",
-    'Element' => "",
-    'Experience' => "",
-    'Skill' => "",
-    'Skill Power' => "",
+    'Name' => $card->name,
+    'Level' => $card->level,
+    'HP' => $card->hp,
+    'MP' => $card->mp,
+    'Attack' => $card->attack,
+    'Defense' => $card->defense,
+    'Element' => $card->element,
+    'Experience' => $card->exp,
+    'Skill' => $card->specialSkill,
+    'Skill Power' => $card->specialSkillPower,
 ];
 
 ?>
