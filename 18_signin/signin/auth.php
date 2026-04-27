@@ -17,10 +17,16 @@ $_SESSION[APP_KEY]['signin'] = sanitize($_POST);
 $account_name = h($_POST['account_name']);
 $password = h($_POST['password']);
 
+// var_dump($account_name, $password);
+// exit;
+
 // ユーザ認証: new User() で auth() を実行
 $user = new User();
 // アカウント名とパスワードを渡して、認証処理
 $auth_user = $user->auth($account_name, $password);
+
+// var_dump($auth_user);
+// exit;
 
 if (empty($auth_user['id'])) {
     // エラーセッション
@@ -30,6 +36,7 @@ if (empty($auth_user['id'])) {
     exit;
 } else {
     // TODO: 認証成功時はセッションにユーザデータを保存: APP_KEY の signin
+    $_SESSION[APP_KEY]['auth_user'] = $auth_user;
 
     // ユーザトップページにリダイレクト: home/
     header('Location: ../home/');
