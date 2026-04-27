@@ -28,7 +28,19 @@ $stats = [
     'Skill' => $card->specialSkill,
     'Skill Power' => $card->specialSkillPower,
 ];
-
+// PythonやJavaScriptの場合
+// stats = {
+//     'Name': card.name,
+//     'Level': card.level,
+//     'HP': card.hp,
+//     'MP': card.mp,
+//     'Attack': card.attack,
+//     'Defense': card.defense,
+//     'Element': card.element,
+//     'Experience': card.exp,
+//     'Skill': card.specialSkill,
+//     'Skill Power': card.specialSkillPower,
+// };
 ?>
 
 <!DOCTYPE html>
