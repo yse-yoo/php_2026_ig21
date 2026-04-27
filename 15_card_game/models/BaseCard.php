@@ -31,6 +31,8 @@ class BaseCard implements CardInterface
         string $specialSkill,
         int $specialSkillPower
     ) {
+        // Java の場合
+        // this.level = 1;
         $this->level = 1;
         $this->exp = 0;
         $this->name = $name;

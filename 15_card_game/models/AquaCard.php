@@ -16,5 +16,9 @@ class AquaCard extends BaseCard
             'ハイドロポンプ',
             35
         );
+
+        // function attack() {
+
+        // }
     }
 }
