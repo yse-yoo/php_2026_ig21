@@ -18,6 +18,9 @@ $posts = sanitize($_POST);
 // TODO: セッションの APP_KEY 下の regist にPOSTデータを保存
 $_SESSION[APP_KEY]['regist'] = $posts;
 
+// 1行で書くなら
+// $_SESSION[APP_KEY]['regist'] = $posts = sanitize($_POST);
+
 // ユーザが存在するかチェック
 $user = new User();
 $user_exists = $user->findForExists($posts);
