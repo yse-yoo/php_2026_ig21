@@ -8,11 +8,11 @@ use App\Models\AuthUser;
 $auth_user = $_SESSION[APP_KEY]['auth_user'] ?? null;
 
 // TODO: セッション（auth_user) からログインチェック
-// if (empty($auth_user)) {
-//     // ログインしていない場合はログイン画面にリダイレクト
-//     header('Location: ../signin/');
-//     exit;
-// }
+if (empty($auth_user)) {
+    // ログインしていない場合はログイン画面にリダイレクト
+    header('Location: ../signin/');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

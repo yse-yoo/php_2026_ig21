@@ -2,12 +2,14 @@
 // 共通アプリファイル読み込み
 require_once "../app.php";
 
-// TODO: 前回の入力値を復元: signin
-$form = null;
+// 前回の入力値を復元: signin
+$form = $_SESSION[APP_KEY]['signin'] ?? null;
 
-// TODO: エラーメッセージを復元: error
-$error = null;
-// TODO: フラッシュメッセージとして削除
+// エラーメッセージを復元: error
+$error = $_SESSION[APP_KEY]['error'] ?? null;
+
+// フラッシュメッセージとして削除
+unset($_SESSION[APP_KEY]['error']);
 ?>
 
 <!DOCTYPE html>
