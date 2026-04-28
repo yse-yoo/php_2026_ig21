@@ -15,6 +15,8 @@ $cards = [
 
 // TODO: リセット
 session_start();
+session_regenerate_id(true);
+
 unset($_SESSION['player_card']);
 unset($_SESSION['enemy_card']);
 
