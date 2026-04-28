@@ -25,7 +25,7 @@ if (!$game->player) {
 }
 
 // TODO: 敵カードを初期化する
-// $game->setupEnemy();
+$game->setupEnemy();
 
 // POST時にCSRFトークンを確認して、action を実行する
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
