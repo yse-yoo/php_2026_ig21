@@ -3,7 +3,7 @@
 require_once __DIR__ . '/services/GameService.php';
 
 // セッションを開始する
-// session_start();
+session_start();
 
 // CSRFトークンを生成する
 if (!isset($_SESSION['csrf_token'])) {
@@ -15,6 +15,7 @@ $game = new GameService();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && ($cardId = $_GET['card_id'] ?? '')) {
     // TODO: GETで受け取った card_id を使ってプレイヤーを初期化: setupPlayer(カードID)
+    $game->setupPlayer($cardId);
 }
 
 // TODO: プレイヤーカードが未選択なら card_list.php へリダイレクトする
