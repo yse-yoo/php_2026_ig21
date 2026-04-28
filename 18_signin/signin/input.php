@@ -2,6 +2,8 @@
 // 共通アプリファイル読み込み
 require_once "../app.php";
 
+// TODO: CSRF の対策の検討
+
 // 前回の入力値を復元: signin
 $form = $_SESSION[APP_KEY]['signin'] ?? null;
 
