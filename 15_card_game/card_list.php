@@ -13,8 +13,14 @@ $cards = [
     'thunder' => new ThunderCard(),
 ];
 
+// TODO: リセット
+session_start();
+unset($_SESSION['player_card']);
+unset($_SESSION['enemy_card']);
+
 // CSRFトークンの生成
 $_SESSION['csrf_token'] = $csrf_token = bin2hex(random_bytes(32));
+
 ?>
 
 <!DOCTYPE html>
