@@ -70,12 +70,13 @@ class BaseCard implements CardInterface
         if ($dmg < $minDmg) $dmg = $minDmg;
 
         // TODO: ターゲットのHPからダメージを引く
+        $target->hp -= $dmg;
 
         // HPが0以下にならないようにする
         if ($target->hp < 0) $target->hp = 0;
 
         // TODO: ダメージを返す
-        return 0;
+        return $dmg;
     }
 
     /**
