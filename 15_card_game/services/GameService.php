@@ -102,7 +102,7 @@ class GameService
     public function isWin(): bool
     {
         // TODO: 敵のHPが0以下なら勝利
-        return false;
+        return ($this->enemy->hp <= 0);
     }
 
     /**
@@ -111,7 +111,7 @@ class GameService
     public function isGameOver(): bool
     {
         // TODO: プレイヤーのHPが0以下ならゲームオーバー
-        return false;
+        return ($this->player->hp <= 0);
     }
 
     /**
