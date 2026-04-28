@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && ($cardId = $_GET['card_id'] ?? '')) 
 
 // TODO: プレイヤーカードが未選択なら card_list.php へリダイレクトする
 if (!$game->player) {
-    // header('Location: card_list.php');
-    // exit;
+    header('Location: card_list.php');
+    exit;
 }
 
 // TODO: 敵カードを初期化する
