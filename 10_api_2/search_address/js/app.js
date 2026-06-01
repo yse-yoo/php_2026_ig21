@@ -4,17 +4,17 @@ const SEARCH_URI = "https://zipcloud.ibsnet.co.jp/api/search";
 const errorDisplay = document.getElementById('error');
 const loadingModal = document.getElementById('loading-modal');
 
-// 都道府県JSON読み込み
+// 都道府県JSON読み込み: async は非同期通信のキーワード
 const loadPrefectures = async () => {
     try {
         // TODO: fetch(): 都道府県JSON読み込み（非同期）: PREFECTURE_FILE_PATH
-        const response = {};
+        const response = await fetch(PREFECTURE_FILE_PATH)
         if (!response.ok) {
             errorDisplay.innerHTML = '都道府県読み込みエラー';
             return;
         }
         // TODO: レスポンスされたJSONを、オブジェクトに変換（非同期）
-        const prefectures = {};
+        const prefectures = await response.json()
         console.log(prefectures);
 
         // 都道府県プルダウン作成
@@ -30,9 +30,9 @@ const renderPrefectures = (prefectures) => {
     prefectures.forEach((prefecture) => {
         var option = document.createElement('option');
         // TODO: value に都道府県コード設定
-        option.value = "";
+        option.value = prefecture.code
         // TODO: テキストに都道府県名設定
-        option.textContent = "";
+        option.textContent = prefecture.name
         // selectタグに、optionタグ追加
         document.getElementById('prefecture').appendChild(option)
     })
@@ -46,7 +46,7 @@ const searchAddress = async (zipcode) => {
         const uri = SEARCH_URI;
         console.log(uri);
         // TODO: fetch(): 郵便番号検索APIにアクセス（非同期）
-        const response = {}; 
+        const response = {};
         // TODO: JSONデータを変換（非同期）
         const data = {};
         return data;
@@ -67,7 +67,7 @@ const searchHandler = async () => {
     try {
         // TODO: 郵便番号検索APIにアクセス
         const data = await searchAddress(zipcode);
-        
+
         if (data && data.results) {
             const results = data.results[0];
             // TODO: value に都道府県コード設定: prefcode
