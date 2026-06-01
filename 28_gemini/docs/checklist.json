@@ -1,0 +1,144 @@
+{
+  "title": "Gemini API 連携チェックリスト",
+  "subtitle": "chat / whats_photo / translate",
+  "intro": "TODO を埋めながら、PHP から Gemini API にリクエストを送り、テキスト生成・画像解析・翻訳 API を完成させましょう。env.php に API キーを設定し、PHP の開発サーバを起動した状態で動作確認を進めます。",
+  "sections": [
+    {
+      "id": "chat",
+      "title": "chat.php の実装",
+      "description": "フォームから送信されたプロンプトを受け取り、GeminiService::chat() に渡して回答を表示します。",
+      "blocks": [
+        { "type": "subheading", "text": "POST データの取得" },
+        {
+          "type": "items",
+          "items": [
+            { "id": "chat-1", "text": "chat.php を開き、POST された prompt を受け取る TODO を確認" },
+            { "id": "chat-2", "text": "$_POST['prompt'] ?? '' を使い、未送信時は空文字になるように実装" },
+            { "id": "chat-3", "text": "textarea の表示値に $prompt が反映され、送信後も入力内容が残ることを確認" }
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "$prompt = $_POST['prompt'] ?? '';\n$result = '';\n\nif ($_SERVER['REQUEST_METHOD'] === 'POST') {\n    $gemini = new GeminiService();\n    $result = $gemini->chat($prompt);\n}"
+        },
+        { "type": "subheading", "text": "動作確認" },
+        {
+          "type": "items",
+          "items": [
+            { "id": "chat-4", "text": "php -S localhost:8000 などで開発サーバを起動" },
+            { "id": "chat-5", "text": "ブラウザで /28_gemini/chat.php を開く" },
+            { "id": "chat-6", "text": "質問を送信し、Gemini の回答が画面に表示されることを確認" },
+            { "id": "chat-7", "text": "空のまま送信したときに「プロンプトが空です」と表示されることを確認" }
+          ]
+        },
+        {
+          "type": "note",
+          "text": "フォームの値は POST 送信時だけ存在します。?? '' を使うと、初回表示時の未定義エラーを避けられます。"
+        }
+      ]
+    },
+    {
+      "id": "whats-photo",
+      "title": "whats_photo.php の実装",
+      "description": "アップロードされた画像ファイルを uploads/ に保存し、そのパスを GeminiService::image() に渡します。",
+      "blocks": [
+        { "type": "subheading", "text": "アップロードファイル情報の取得" },
+        {
+          "type": "items",
+          "items": [
+            { "id": "photo-1", "text": "whats_photo.php の uploadImage() を確認" },
+            { "id": "photo-2", "text": "$_FILES['image']['name'] から元のファイル名を取得" },
+            { "id": "photo-3", "text": "pathinfo() で拡張子を取得し、uniqid() を使って保存名を作成" },
+            { "id": "photo-4", "text": "$_FILES['image']['tmp_name'] から一時ファイルのパスを取得" },
+            { "id": "photo-5", "text": "move_uploaded_file() で uploads/ に画像が保存されることを確認" }
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "$fileName = $_FILES['image']['name'];\n$extension = pathinfo($fileName, PATHINFO_EXTENSION);\n$fileName = uniqid() . \".{$extension}\";\n$uploadedImagePath = \"uploads/{$fileName}\";\n\n$filePath = $_FILES['image']['tmp_name'];\nmove_uploaded_file($filePath, $uploadedImagePath);"
+        },
+        { "type": "subheading", "text": "画像解析の確認" },
+        {
+          "type": "items",
+          "items": [
+            { "id": "photo-6", "text": "ブラウザで /28_gemini/whats_photo.php を開く" },
+            { "id": "photo-7", "text": "画像をアップロードし、プレビューが表示されることを確認" },
+            { "id": "photo-8", "text": "Gemini による画像説明が日本語で表示されることを確認" }
+          ]
+        },
+        {
+          "type": "note",
+          "text": "アップロードされたファイルは一時ディレクトリに置かれるため、tmp_name を move_uploaded_file() に渡して保存先へ移動します。"
+        }
+      ]
+    },
+    {
+      "id": "translate",
+      "title": "translate.php と翻訳 API の実装",
+      "description": "画面、JavaScript、API、サービスをつなぎ、音声入力またはテキスト入力から翻訳結果を取得します。",
+      "blocks": [
+        { "type": "subheading", "text": "GeminiService.php の確認" },
+        {
+          "type": "items",
+          "items": [
+            { "id": "tr-1", "text": "chat() で json_decode($response, true) を使い、Gemini の JSON レスポンスを配列化" },
+            { "id": "tr-2", "text": "image() で mime_content_type() を使って MIME タイプを取得" },
+            { "id": "tr-3", "text": "image() で base64_encode() を使って画像データを Base64 化" },
+            { "id": "tr-4", "text": "image() のプロンプトに「この画像に写っている内容を日本語で説明してください。」を設定" }
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "$json = json_decode($response, true);\n\n$mime_type = mime_content_type($image_path) ?: 'image/jpeg';\n$image_base64 = base64_encode($image);\n$prompt = \"この画像に写っている内容を日本語で説明してください。\";"
+        },
+        { "type": "subheading", "text": "api/ai/translate.php の確認" },
+        {
+          "type": "items",
+          "items": [
+            { "id": "tr-5", "text": "CORS と Content-Type: application/json の header() が設定されていることを確認" },
+            { "id": "tr-6", "text": "php://input の JSON を json_decode($input, true) で配列に変換" },
+            { "id": "tr-7", "text": "origin / fromLang / toLang を検証してから GeminiService::translate() を呼ぶ" },
+            { "id": "tr-8", "text": "json_encode($posts, JSON_UNESCAPED_UNICODE) で翻訳結果を JSON レスポンスとして返す" }
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "header(\"Access-Control-Allow-Origin: *\");\nheader(\"Access-Control-Allow-Methods: POST, GET, OPTIONS\");\nheader(\"Access-Control-Allow-Headers: Content-Type, Authorization\");\nheader('Content-Type: application/json');\n\n$input = file_get_contents('php://input');\n$posts = json_decode($input, true);\n\n$json = json_encode($posts, JSON_UNESCAPED_UNICODE);\necho $json;"
+        },
+        { "type": "subheading", "text": "js/translate.js の確認" },
+        {
+          "type": "items",
+          "items": [
+            { "id": "tr-9", "text": "env.js の HOST と BASE_PATH を使って /api/ai/translate.php の URL を組み立てる" },
+            { "id": "tr-10", "text": "fetch() で POST リクエストを送り、Content-Type: application/json を指定" },
+            { "id": "tr-11", "text": "JSON.stringify(data) で origin / fromLang / toLang を送信" },
+            { "id": "tr-12", "text": "await response.json() でレスポンスを解析し、renderTranslation() に渡す" }
+          ]
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "code": "const TRANSLATION_URI = `${HOST}${BASE_PATH}/api/ai/translate.php`;\nconst response = await fetch(TRANSLATION_URI, {\n    method: 'POST',\n    headers: {\n        'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(data)\n});\n\nconst result = await response.json();"
+        },
+        { "type": "subheading", "text": "動作確認" },
+        {
+          "type": "items",
+          "items": [
+            { "id": "tr-13", "text": "ブラウザで /28_gemini/translate.php を開く" },
+            { "id": "tr-14", "text": "翻訳前・翻訳後の言語を選択してテキストを入力" },
+            { "id": "tr-15", "text": "翻訳ボタンを押し、会話欄に原文と翻訳結果が表示されることを確認" },
+            { "id": "tr-16", "text": "DevTools の Network タブで api/ai/translate.php への POST と JSON レスポンスを確認" }
+          ]
+        },
+        {
+          "type": "note",
+          "text": "translate.php は画面表示、js/translate.js はブラウザからの通信、api/ai/translate.php は JSON API、GeminiService.php は Gemini API 呼び出しを担当します。"
+        }
+      ]
+    }
+  ]
+}
