@@ -51,7 +51,7 @@ class GeminiService
         }
 
         // TODO: レスポンス(JSON)をデコード
-        $json = [];
+        $json = json_decode($response, true);
 
         // テキストデータを返す: GeminiAPIのレスポンス形式に合わせて、テキストデータを取得
         return $json['candidates'][0]['content']['parts'][0]['text'] ?? null;
