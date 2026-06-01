@@ -104,9 +104,9 @@ async function fetchInitialCart() {
     try {
         const uri = "api/cart/get.php";
         // TODO: GETリクエストで現在のカート情報を取得: fetchAPI
-        const response = {};
+        const response = await fetch(uri)
         // TODO: JSON形式でレスポンスを取得: json()
-        const result = {};
+        const result = await response.json()
         console.log('Initial Cart Fetch Result:', result);
 
         // カートの中身があれば反映
@@ -123,12 +123,12 @@ async function fetchInitialCart() {
 async function addToCart(productId) {
     try {
         // TODO: カート追加APIのURLを指定: api/cart/add.php
-        const uri = "";
+        const uri = "api/cart/add.php"
         // TODO: POSTリクエストで商品ID(productId)を JSONで送信
         const response = await fetch(uri, {
-            method: '',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: "",
+            body: JSON.stringify({ id: productId }),
         });
         // JSON形式でレスポンスを取得
         const result = await response.json();
@@ -292,4 +292,5 @@ cartCloseBtn.addEventListener('click', () => cartModal.classList.add('hidden'));
     // 商品データ
     await fetchProducts();
     // TODO: カート照合: fetchInitialCart(非同期)
+    await fetchInitialCart()
 })();
