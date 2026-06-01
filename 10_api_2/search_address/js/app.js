@@ -38,17 +38,17 @@ const renderPrefectures = (prefectures) => {
     })
 }
 
-// 郵便番号検索
+// 郵便番号検索: https://zipcloud.ibsnet.co.jp/api/search?zipcode=xxxxxx にリクエスト＆レスポンス処理
 const searchAddress = async (zipcode) => {
     try {
         const query_param = new URLSearchParams({ zipcode: zipcode, })
         // TODO: SEARCH_URI に zipcode を追加
-        const uri = SEARCH_URI;
+        const uri = SEARCH_URI + '?' + query_param.toString();
         console.log(uri);
         // TODO: fetch(): 郵便番号検索APIにアクセス（非同期）
-        const response = {};
+        const response = await fetch(uri)
         // TODO: JSONデータを変換（非同期）
-        const data = {};
+        const data = await response.json()
         return data;
     } catch (error) {
         errorDisplay.innerHTML = error;
@@ -71,18 +71,18 @@ const searchHandler = async () => {
         if (data && data.results) {
             const results = data.results[0];
             // TODO: value に都道府県コード設定: prefcode
-            document.getElementById('prefecture').value = "";
+            document.getElementById('prefecture').value = results.prefcode
             // TODO: テキストに住所設定: address2, address3
-            document.getElementById('city').value = "";
+            document.getElementById('city').value = results.address2 + results.address3
         } else {
             errorDisplay.innerHTML = data.message || '住所が見つかりませんでした';
         }
     } catch (e) {
         errorDisplay.innerHTML = '通信エラーが発生しました';
     } finally {
-        setTimeout(() => {
-            loadingModal.classList.add('hidden');
-        }, 500);
+        // setTimeout(() => {
+        //     loadingModal.classList.add('hidden');
+        // }, 500);
     }
 }
 
