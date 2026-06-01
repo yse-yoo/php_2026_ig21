@@ -3,7 +3,7 @@ require_once 'env.php';
 require_once 'services/GeminiService.php';
 
 // TODO: POSTされたプロンプトを取得
-$prompt = '';
+$prompt = $_POST['prompt'] ?? '';
 $result = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.5/dist/purify.min.js"></script>
 </head>
+
 <body class="min-h-screen bg-slate-100 p-6">
     <main class="mx-auto max-w-4xl space-y-6">
         <header class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -50,7 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <section class="rounded-lg border border-slate-200 bg-white p-6 shadow">
                 <h2 class="text-lg font-semibold text-slate-900">Geminiの回答</h2>
                 <div id="gemini-response" class="prose prose-slate mt-5 max-w-none rounded-lg border border-slate-200 bg-slate-50 p-5 prose-a:text-sky-600"></div>
-                <script id="gemini-result" type="application/json"><?= json_encode($result, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
+                <script id="gemini-result" type="application/json">
+                    <?= json_encode($result, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>
+                </script>
             </section>
         <?php endif; ?>
     </main>
@@ -64,7 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 const markdownText = JSON.parse(markdownElement.textContent);
 
                 if (window.marked && window.DOMPurify) {
-                    marked.setOptions({ breaks: true, gfm: true });
+                    marked.setOptions({
+                        breaks: true,
+                        gfm: true
+                    });
                     responseElement.innerHTML = DOMPurify.sanitize(marked.parse(markdownText));
                 } else {
                     responseElement.textContent = markdownText;
