@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-
+// リクエストのJSONデータを取得して、PHPの連想配列に変換
 $input = json_decode(file_get_contents('php://input'), true);
 $id = $input['id'] ?? null;
 
