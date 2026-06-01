@@ -18,16 +18,16 @@ async function fetchProducts() {
     loader.classList.remove('hidden');
     try {
         // 商品データAPIのURL
-        // const productsApiURL = 'https://fakestoreapi.com/products';
+        const productsApiURL = 'https://fakestoreapi.com/products';
         // ローカルPHP APIのURLを指定: api/products/get.php
-        const productsApiURL = 'api/products/get.php';
+        // const productsApiURL = 'api/products/get.php';
 
         // TODO: APIから商品データを取得: fetchAPI
-        const response = {};
+        const response = await fetch(productsApiURL)
         // APIレスポンスをチェック
         if (!response.ok) showFlash('商品データの取得に失敗しました');
         // TODO: JSON形式でレスポンスを取得: json()
-        allProducts = [];
+        allProducts = await response.json()
         // 商品一覧を描画
         renderProducts(allProducts);
     } catch (error) {
