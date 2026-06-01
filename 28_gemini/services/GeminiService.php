@@ -86,14 +86,15 @@ class GeminiService
 
         // TODO: MIMEタイプを取得
         $mime_type = "";
-        // $mime_type = mime_content_type($image_path) ?: 'image/jpeg';
+        $mime_type = mime_content_type($image_path) ?: 'image/jpeg';
 
         // TODO: 画像をBase64エンコード
         $image_base64 = "";
-        // $image_base64 = base64_encode($image);
+        $image_base64 = base64_encode($image);
 
         // TODO: プロンプトを作成: この画像に写っている内容を日本語で説明してください。
-        $prompt = "";
+        // $prompt = "画像の内容を日本語で説明して。30文字以内で。";
+        $prompt = "画像のレシピを日本語で作成して。";
 
         // リクエストデータを作成
         $data = [
