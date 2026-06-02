@@ -84,7 +84,7 @@ const translate = async (origin, fromLang, toLang) => {
         }
 
         // TODO: レスポンスをJSONとして解析
-        const result = [];
+        const result = await response.json();
         console.log(result);
 
         if (result.status === 'error') {
@@ -163,15 +163,15 @@ const playText = () => {
 
 // 翻訳結果を音声で読み上げ
 const speakTranslation = (text) => {
-    // const synth = window.speechSynthesis;
-    // const utterance = new SpeechSynthesisUtterance(text);
-    // utterance.lang = toLangSelect.value;
-    // synth.speak(utterance);
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = toLangSelect.value;
+    synth.speak(utterance);
 
-    // synth.addEventListener('voiceschanged', () => {
-    //     console.log('voice changed')
-    //     const voice = speechSynthesis.getVoices();
-    // });
+    synth.addEventListener('voiceschanged', () => {
+        console.log('voice changed')
+        const voice = speechSynthesis.getVoices();
+    });
 };
 
 /**
