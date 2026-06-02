@@ -20,10 +20,11 @@ const spotsApiUrl = 'api/spots.php';
 window.initMap = function initMap() {
   geocoder = new google.maps.Geocoder();
   infoWindow = new google.maps.InfoWindow();
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: defaultPlace.position,
-    zoom: 14,
+  // 地図を初期化: id=map の要素に地図を表示
+  const mapArea = document.getElementById('map');
+  map = new google.maps.Map(mapArea, {
+    center: defaultPlace.position, // 地図の中心位置
+    zoom: 12,  // ズームレベル
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: true,
@@ -87,6 +88,7 @@ function moveToPlace(place, zoom) {
 
 // マーカーを作成
 function createMarker(place) {
+
   const nextMarker = new google.maps.Marker({
     position: place.position,
     map,
