@@ -4,10 +4,10 @@ require_once '../../lib/Lang.php';
 require_once '../../services/GeminiService.php';
 
 // TODO: CORS設定: ワイルドカード(Access-Control-Allow-Origin: *)を使用
-// header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-// header("Access-Control-Allow-Headers: Content-Type, Authorization");
-// header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // POSTリクエストの処理
 $input = file_get_contents('php://input');
 // TODO: JSONデータを配列に変換
-$posts = [];
+$posts = json_decode($input, true);
 
 if (!is_array($posts)) {
     echo json_encode([
@@ -43,5 +43,5 @@ $posts['status'] = $posts['translate'] === null ? 'error' : 'success';
 
 // JSON形式でレスポンス
 // TODO: JSON形式に変換
-$json = "";
+$json = json_encode($posts, JSON_UNESCAPED_UNICODE);
 echo $json;

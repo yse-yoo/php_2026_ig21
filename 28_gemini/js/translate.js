@@ -68,13 +68,13 @@ const translate = async (origin, fromLang, toLang) => {
     // 翻訳APIに送るデータを作成
     const data = { origin, fromLang, toLang }
     try {
-        // TODO: /api/ai/translate.php にPOSTリクエストを送る
-        const TRANSLATION_URI = "";
+        // TODO: api/ai/translate.php にPOSTリクエストを送る
+        const TRANSLATION_URI = "api/ai/translate.php";
         // 翻訳APIにリクエスト:POST & JSON形式
         const response = await fetch(TRANSLATION_URI, {
             method: 'POST',
             headers: {
-                // 'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         });
