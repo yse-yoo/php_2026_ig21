@@ -20,7 +20,7 @@ const colors = [
 
 // ─── 統計を画面に表示する関数 ───
 function renderStats() {
-    const total  = values.reduce((s, v) => s + v, 0);
+    const total = values.reduce((s, v) => s + v, 0);
     const maxIdx = values.indexOf(Math.max(...values));
     const minIdx = values.indexOf(Math.min(...values));
 
@@ -49,15 +49,15 @@ function renderStats() {
 // ─── グラフの作成 ───
 new Chart(ctx, {
     // TODO: 棒グラフ: bar
-    type: '',   
+    type: 'bar',
     data: {
         labels,
         datasets: [{
             label: 'Votes',
             // TODO: 票数の配列をセット: values
-            data: null,
+            data: values,
             // TODO: グラフの色をセット: colors
-            backgroundColor: [],
+            backgroundColor: colors,
             borderRadius: 8,
             borderSkipped: false,
         }],
