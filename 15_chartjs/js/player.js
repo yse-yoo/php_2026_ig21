@@ -77,7 +77,7 @@ function createThumbnail(player) {
     thumb.className = 'w-20 h-20 object-cover cursor-pointer border-2 border-cyan-900/60 transition-all duration-200 opacity-50 hover:opacity-90';
 
     // TODO: クリックでプレイヤーデータを読み込む
-    thumb.addEventListener('', () => loadPlayer(player.id));
+    thumb.addEventListener('click', () => loadPlayer(player.id));
     return thumb;
 }
 
@@ -96,7 +96,7 @@ function loadPlayer(playerId) {
     if (activeThumb) activeThumb.classList.add('thumb-active');
 
     // TODO: 画像更新
-    // transitionImage(playerData.image);
+    transitionImage(playerData.image);
 
     // ID更新（4桁ゼロパディング）
     document.getElementById('hud-id').textContent = String(playerId).padStart(4, '0');
