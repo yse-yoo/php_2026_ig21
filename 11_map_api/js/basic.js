@@ -175,6 +175,7 @@ function renderSpotList(spots) {
   });
 }
 
+// スポットを移動する処理
 function focusSpot(spot, index) {
   map.panTo(spot.position);
   map.setZoom(16);
