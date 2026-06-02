@@ -58,7 +58,7 @@ function createChart(chartConfig) {
     chartConfig.options.plugins.title = Object.assign(chartCustom.title, chartConfig.options.plugins.title);
 
     // TODO: 新しいチャートを作成
-    // playerChart = new Chart(ctx, chartConfig);
+    playerChart = new Chart(ctx, chartConfig);
 }
 
 // サムネイル生成とクリックイベント
@@ -113,7 +113,7 @@ function loadPlayer(playerId) {
 async function init() {
     try {
         // TODO: API URL: api/players.json 
-        const uri = '';
+        const uri = 'api/players.json';
         // APIからデータを取得
         const res = await fetch(uri);
         // JSONをプレイヤーリストに変換
@@ -154,9 +154,9 @@ function transitionImage(newSrc) {
 
     // Canvasの2Dコンテキストを取得
     const ctx = document.createElementNS ? canvas.getContext('2d') : null;
-    if (!ctx) { 
-        playerImage.src = newSrc; 
-        return; 
+    if (!ctx) {
+        playerImage.src = newSrc;
+        return;
     }
 
     let frame = 0;
