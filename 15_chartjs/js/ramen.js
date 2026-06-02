@@ -32,11 +32,16 @@ async function loadRamenData() {
 function renderTotal(labels, groups) {
     const totalList = getTotalData(labels, groups);
 
+    // 降順
     // TODO: totalList を「票数の多い順」に並べ替え
     totalList.sort((a, b) => b.total - a.total);
 
     // TODO: totalList の最初の最大値を取得（1位の票数）
     const maxTotal = totalList[0].total;
+
+    // 昇順
+    // totalList.sort((a, b) => a.total - b.total);
+    // const maxTotal = totalList[totalList.length - 1].total;
 
     totalContainer.innerHTML = totalList.map((item, i) => {
         const pct = Math.round((item.total / maxTotal) * 100);
